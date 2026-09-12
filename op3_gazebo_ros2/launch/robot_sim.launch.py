@@ -31,9 +31,15 @@ def generate_launch_description():
             str(Path(op3_description_path).parent.resolve())
             ]
         )
+    field_world = os.path.join(
+        op3_gazebo_path,
+        'worlds',
+        'robocup09_spl_field',
+        'model.sdf'
+    )
 
     arguments = LaunchDescription([
-                DeclareLaunchArgument('world', default_value='empty',
+                DeclareLaunchArgument('world', default_value=field_world,
                           description='Gz sim World'),
            ]
     )
@@ -43,7 +49,6 @@ def generate_launch_description():
                     get_package_share_directory('ros_gz_sim'), 'launch'), '/gz_sim.launch.py']),
                 launch_arguments=[
                     ('gz_args', [LaunchConfiguration('world'),
-                                 '.sdf',
                                  ' -v 4',
                                  ' -r']
                     )
